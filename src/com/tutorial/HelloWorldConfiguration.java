@@ -4,20 +4,19 @@ import com.yammer.dropwizard.config.Configuration;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+
 public class HelloWorldConfiguration extends Configuration {
-    @NotEmpty
+    @JsonProperty @NotEmpty
+    public String mongohost = "localhost";
+
+    @Min(1)
+    @Max(65535)
     @JsonProperty
-    private String template;
+    public int mongoport = 27017;
 
-    @NotEmpty
-    @JsonProperty
-    private String defaultName = "Stranger";
+    @JsonProperty @NotEmpty
+    public String mongodb = "yourdb";
 
-    public String getTemplate() {
-        return template;
-    }
-
-    public String getDefaultName() {
-        return defaultName;
-    }
 }

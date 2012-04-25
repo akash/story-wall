@@ -3,7 +3,6 @@
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_6" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
-    <exclude-output />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
@@ -42,6 +41,10 @@
     <orderEntry type="library" name="Maven: org.hibernate:hibernate-validator:4.2.0.Final" level="project" />
     <orderEntry type="library" name="Maven: javax.validation:validation-api:1.0.0.GA" level="project" />
     <orderEntry type="library" name="Maven: org.yaml:snakeyaml:1.10" level="project" />
+    <orderEntry type="library" name="Maven: net.vz.mongodb.jackson:mongo-jackson-mapper:1.4.2" level="project" />
+    <orderEntry type="library" name="Maven: org.mongodb:mongo-java-driver:2.7.2" level="project" />
+    <orderEntry type="library" name="Maven: de.undercouch:bson4jackson:1.3.0" level="project" />
+    <orderEntry type="library" name="Maven: javax.persistence:persistence-api:1.0.2" level="project" />
   </component>
 </module>
 

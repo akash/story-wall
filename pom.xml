@@ -12,6 +12,11 @@
             <artifactId>dropwizard-core</artifactId>
             <version>0.3.1</version>
         </dependency>
+        <dependency>
+            <groupId>net.vz.mongodb.jackson</groupId>
+            <artifactId>mongo-jackson-mapper</artifactId>
+            <version>1.4.2</version>
+        </dependency>
     </dependencies>
 
     <properties>

@@ -1,19 +1,38 @@
 package com.tutorial;
 
-public class Saying {
-    private final long id;
-    private final String content;
+import com.google.common.base.Optional;
 
-    public Saying(long id, String content) {
-        this.id = id;
-        this.content = content;
+import javax.persistence.Id;
+
+public class Saying {
+    @Id
+    private String id;
+    private String template;
+    private String lang;
+
+    public Saying(){
+
     }
 
-    public long getId() {
+    public Saying(String id, String template, String lang) {
+        this.id = id;
+        this.template = template;
+        this.lang = lang;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public String getContent() {
-        return content;
+    public String getTemplate() {
+        return template;
+    }
+
+    public String getLang() {
+        return lang;
+    }
+
+    public Saying apply(Optional<String> name) {
+        return new Saying(this.id, String.format(template, name.or("Stranger")), lang);
     }
 }
