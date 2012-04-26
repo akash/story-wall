@@ -1,4 +1,4 @@
-package com.tutorial;
+package com.tutorial.health;
 
 import com.mongodb.Mongo;
 import com.yammer.metrics.core.HealthCheck;

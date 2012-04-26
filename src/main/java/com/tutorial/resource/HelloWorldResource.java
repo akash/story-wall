@@ -1,7 +1,9 @@
-package com.tutorial;
+package com.tutorial.resource;
 
 import com.google.common.base.Optional;
+import com.tutorial.core.Saying;
 import com.yammer.metrics.annotation.Timed;
+import net.vz.mongodb.jackson.DBCursor;
 import net.vz.mongodb.jackson.JacksonDBCollection;
 
 import javax.ws.rs.GET;
@@ -27,12 +29,12 @@ public class HelloWorldResource {
     @Timed
     public Response sayHello(@QueryParam("name") Optional<String> name, @QueryParam("lang") Optional<String> lang) {
 
-        Saying saying = sayings.find().is("lang", lang.or("en")).next();
-        if(saying == null)
+        DBCursor<Saying> sayings = this.sayings.find().is("lang", lang.or("en"));
+        if(sayings.size() == 0)
         {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
-        return Response.ok(saying.apply(name)).build();
+        return Response.ok(sayings.next().apply(name)).build();
     }
 }

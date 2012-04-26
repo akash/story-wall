@@ -1,4 +1,4 @@
-package com.tutorial;
+package com.tutorial.core;
 
 import com.google.common.base.Optional;
 
