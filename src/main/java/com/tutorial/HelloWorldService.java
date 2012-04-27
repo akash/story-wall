@@ -25,6 +25,7 @@ public class HelloWorldService extends Service<HelloWorldConfiguration> {
         DB db = mongo.getDB(configuration.mongodb);
         JacksonDBCollection<Saying, String> sayings =
                 JacksonDBCollection.wrap(db.getCollection("sayings"), Saying.class, String.class);
+        sayings.insert(new Saying("1", "Hello %s", "en"));
 
         MongoManaged mongoManaged = new MongoManaged(mongo);
         environment.manage(mongoManaged);
