@@ -13,6 +13,11 @@
             <version>0.3.1</version>
         </dependency>
         <dependency>
+            <groupId>com.yammer.dropwizard</groupId>
+            <artifactId>dropwizard-views</artifactId>
+            <version>0.3.1</version>
+        </dependency>
+        <dependency>
             <groupId>net.vz.mongodb.jackson</groupId>
             <artifactId>mongo-jackson-mapper</artifactId>
             <version>1.4.2</version>

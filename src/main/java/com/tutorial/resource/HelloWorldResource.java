@@ -14,7 +14,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import static javax.ws.rs.core.Response.Status.NOT_FOUND;
-import static javax.ws.rs.core.Response.status;
 
 @Path("/hello-world")
 @Produces(MediaType.APPLICATION_JSON)
@@ -32,7 +31,7 @@ public class HelloWorldResource {
         DBCursor<Saying> sayings = this.sayings.find().is("lang", lang.or("en"));
         if(!sayings.hasNext())
         {
-            return status(NOT_FOUND).build();
+            return Response.status(NOT_FOUND).build();
         }
 
         return Response.ok(sayings.next().apply(name)).build();
