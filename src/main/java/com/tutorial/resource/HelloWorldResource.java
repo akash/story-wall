@@ -28,12 +28,20 @@ public class HelloWorldResource {
     @Timed
     public Response sayHello(@QueryParam("name") Optional<String> name, @QueryParam("lang") Optional<String> lang) {
 
-        DBCursor<Saying> sayings = this.sayings.find().is("lang", lang.or("en"));
-        if(!sayings.hasNext())
+
+        DBCursor<Saying> result = sayings.find();
+        Saying saying = null;
+
+        if (!result.hasNext())
+            saying = new Saying("", "Hello World!", "en");
+        else
+            saying = result.is("lang", lang.or("en")).next();
+
+        if(saying == null)
         {
             return Response.status(NOT_FOUND).build();
         }
 
-        return Response.ok(sayings.next().apply(name)).build();
+        return Response.ok(result.next().apply(name)).build();
     }
 }
