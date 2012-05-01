@@ -1,0 +1,15 @@
+html {
+    background: #eeeeee;
+}
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: #eeeeee;
+    color: #333333;
+}
+
+.wall-column{
+    float:left;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+

@@ -7,6 +7,7 @@ import com.tutorial.health.MongoHealthCheck;
 import com.tutorial.resource.HelloWorldResource;
 import com.tutorial.resource.StoryResource;
 import com.yammer.dropwizard.Service;
+import com.yammer.dropwizard.bundles.AssetsBundle;
 import com.yammer.dropwizard.config.Environment;
 import com.yammer.dropwizard.views.ViewBundle;
 import net.vz.mongodb.jackson.JacksonDBCollection;
@@ -19,6 +20,7 @@ public class HelloWorldService extends Service<HelloWorldConfiguration> {
     private HelloWorldService() {
         super("hello-world");
         addBundle(new ViewBundle());
+        addBundle(new AssetsBundle("/assets/"));
     }
 
     @Override
