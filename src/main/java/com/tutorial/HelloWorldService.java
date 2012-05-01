@@ -18,21 +18,20 @@ public class HelloWorldService extends Service<HelloWorldConfiguration> {
 
     private HelloWorldService() {
         super("hello-world");
+        addBundle(new ViewBundle());
     }
 
     @Override
     protected void initialize(HelloWorldConfiguration configuration, Environment environment) throws Exception {
-        addBundle(new ViewBundle());
-
         Mongo mongo = new Mongo(configuration.mongohost, configuration.mongoport);
         DB db = mongo.getDB(configuration.mongodb);
-        JacksonDBCollection<Saying, String> sayings =
-                JacksonDBCollection.wrap(db.getCollection("sayings"), Saying.class, String.class);
-        sayings.insert(new Saying("1", "Hello %s", "en"));
         MongoManaged mongoManaged = new MongoManaged(mongo);
         environment.manage(mongoManaged);
         environment.addHealthCheck(new MongoHealthCheck(mongo));
 
+        JacksonDBCollection<Saying, String> sayings =
+                JacksonDBCollection.wrap(db.getCollection("sayings"), Saying.class, String.class);
+        sayings.insert(new Saying("1", "Hello %s", "en"));
         environment.addResource(new HelloWorldResource(sayings));
         environment.addResource(new StoryResource());
     }
