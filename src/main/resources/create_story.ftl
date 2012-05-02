@@ -1,7 +1,7 @@
 <#-- @ftlvariable name="" type="com.tutorial.view.CreateStoryView" -->
 <html>
 <head>
-    <link href="http://localhost:8080/assets/default.css" rel="stylesheet" type="text/css"/>
+    <link href="/assets/default.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 
