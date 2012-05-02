@@ -15,4 +15,10 @@ public class SayingTests {
         assertThat(saying.apply(Optional.of("London")), is("hello London"));
     }
 
+    @Test
+    public void shouldApplySayingWithDefaultNameWhenNoneProvided(){
+        Saying saying = new Saying("hello %s", "en");
+        assertThat(saying.apply(Optional.<String>absent()), is("hello Stranger"));
+    }
+
 }

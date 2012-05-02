@@ -11,10 +11,10 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class StoryWallTests extends AcceptanceTestBase {
+public class StoryWallIT extends AcceptanceTestBase {
 
     @Test
-    public void shouldShowColumns(){
+    public void shouldShowColumns() throws Exception {
         StoryWallPage page = NavigateTo.storyWallPage(driver);
 
         List<WebElement> columns = page.getSwimlanes();
