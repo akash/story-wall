@@ -1,9 +1,10 @@
 package com.tutorial.core;
 
 import net.vz.mongodb.jackson.Id;
+import javax.persistence.GeneratedValue;
 
 public class Story {
-    @Id
+    @Id @GeneratedValue
     private String id;
     private String name;
     private String estimate;
