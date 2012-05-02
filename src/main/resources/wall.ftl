@@ -1,8 +1,6 @@
 <#-- @ftlvariable name="" type="com.tutorial.view.StoriesView" -->
-<html>
-<head>
-    <link href="/assets/default.css" rel="stylesheet" type="text/css"/>
-</head>
+<#include 'macros.ftl'>
+<@header "Create Story" />
 <body>
 
     <h1>Story wall</h1>
@@ -36,4 +34,4 @@
     <a href="/stories/new" style="clear:both;float:left">Add Story</a>
 
 </body>
-</html>
+<@footer />

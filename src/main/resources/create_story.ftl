@@ -1,8 +1,6 @@
 <#-- @ftlvariable name="" type="com.tutorial.view.CreateStoryView" -->
-<html>
-<head>
-    <link href="/assets/default.css" rel="stylesheet" type="text/css"/>
-</head>
+<#include 'macros.ftl'>
+<@header "Create Story" />
 <body>
 
     <h1>Create Story</h1>
@@ -14,4 +12,4 @@
     </form>
 
 </body>
-</html>
+<@footer />
