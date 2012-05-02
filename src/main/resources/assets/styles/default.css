@@ -11,5 +11,7 @@ body {
     float:left;
     padding-left: 100px;
     padding-right: 100px;
+    list-style: none;
+    height: 500px
 }
 
