@@ -3,6 +3,7 @@ package com.tutorial;
 import com.mongodb.DB;
 import com.mongodb.Mongo;
 import com.tutorial.core.Saying;
+import com.tutorial.core.Story;
 import com.tutorial.health.MongoHealthCheck;
 import com.tutorial.resource.HelloWorldResource;
 import com.tutorial.resource.StoryResource;
@@ -31,11 +32,12 @@ public class HelloWorldService extends Service<HelloWorldConfiguration> {
         environment.manage(mongoManaged);
         environment.addHealthCheck(new MongoHealthCheck(mongo));
 
-        JacksonDBCollection<Saying, String> sayings =
-                JacksonDBCollection.wrap(db.getCollection("sayings"), Saying.class, String.class);
-        sayings.insert(new Saying("Hello %s", "en"));
+        JacksonDBCollection<Saying, String> sayings = JacksonDBCollection.wrap(db.getCollection("sayings"), Saying.class, String.class);
+        JacksonDBCollection<Story, String> stories = JacksonDBCollection.wrap(db.getCollection("stories"), Story.class, String.class);
+        if (sayings.find().count() == 0)
+            sayings.insert(new Saying("Hello %s", "en"));
         environment.addResource(new HelloWorldResource(sayings));
-        environment.addResource(new StoryResource());
+        environment.addResource(new StoryResource(stories));
     }
 
 }

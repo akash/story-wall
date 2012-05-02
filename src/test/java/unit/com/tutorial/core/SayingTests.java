@@ -1,6 +1,7 @@
-package com.tutorial.core;
+package unit.com.tutorial.core;
 
 import com.google.common.base.Optional;
+import com.tutorial.core.Saying;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;

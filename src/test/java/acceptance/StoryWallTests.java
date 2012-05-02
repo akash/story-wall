@@ -1,8 +1,10 @@
+package acceptance;
+
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import page.NavigateTo;
-import page.StoryWallPage;
+import util.page.NavigateTo;
+import util.page.StoryWallPage;
 
 import java.util.List;
 

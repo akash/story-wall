@@ -1,3 +1,4 @@
+<#-- @ftlvariable name="" type="com.tutorial.view.StoriesView" -->
 <html>
 <head>
     <link href="http://localhost:8080/assets/default.css" rel="stylesheet" type="text/css"/>
@@ -26,6 +27,8 @@
 
         </div>
     </div>
+
+    <a href="/stories/new" style="clear:both;float:left">Add Story</a>
 
 </body>
 </html>
