@@ -18,14 +18,14 @@ public class HelloWorldService extends Service<HelloWorldConfiguration> {
         new HelloWorldService().run(args);
     }
 
-    private HelloWorldService() {
+    public HelloWorldService() {
         super("hello-world");
         addBundle(new ViewBundle());
         addBundle(new AssetsBundle("/assets/"));
     }
 
     @Override
-    protected void initialize(HelloWorldConfiguration configuration, Environment environment) throws Exception {
+    public void initialize(HelloWorldConfiguration configuration, Environment environment) throws Exception {
         Mongo mongo = new Mongo(configuration.mongohost, configuration.mongoport);
         DB db = mongo.getDB(configuration.mongodb);
         MongoManaged mongoManaged = new MongoManaged(mongo);
