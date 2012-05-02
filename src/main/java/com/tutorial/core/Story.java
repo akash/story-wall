@@ -1,6 +1,6 @@
 package com.tutorial.core;
 
-import javax.persistence.Id;
+import net.vz.mongodb.jackson.Id;
 
 public class Story {
     @Id

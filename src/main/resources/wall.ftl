@@ -7,10 +7,15 @@
 
     <h1>Story wall</h1>
 
+    <#if newStory??>
+        <span>Story ${newStory.id} successfully added</span>
+    </#if>
     <div class="wall-column">
         <h2 class="column-title">Backlog</h2>
         <div class="column-data">
-
+            <#list stories as story>
+                <div class="story"><span>${story.name} - ${story.estimate}</span></div>
+            </#list>
         </div>
     </div>
 
