@@ -1,25 +1,25 @@
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import page.NavigateTo;
+import page.StoryWallPage;
 
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class StoryWallTests {
+public class StoryWallTests extends AcceptanceTestBase {
 
     @Test
     public void shouldShowColumns(){
-        WebDriver driver = new HtmlUnitDriver();
-        driver.get("http://localhost:8080/stories");
+        StoryWallPage page = NavigateTo.storyWallPage(driver);
 
-        List<WebElement> columns = driver.findElements(By.className("wall-column"));
+        List<WebElement> columns = page.getSwimlanes();
         assertThat(columns.size(), is(3));
         assertThat(columns.get(0).findElement(By.tagName("h2")).getText(), is("Backlog"));
         assertThat(columns.get(1).findElement(By.tagName("h2")).getText(), is("In Progress"));
         assertThat(columns.get(2).findElement(By.tagName("h2")).getText(), is("Done"));
     }
+
 }

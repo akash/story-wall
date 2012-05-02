@@ -1,21 +1,21 @@
 package com.tutorial.core;
 
 import com.google.common.base.Optional;
+import net.vz.mongodb.jackson.Id;
 
-import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+
 
 public class Saying {
-    @Id
+
+    @Id @GeneratedValue
     private String id;
     private String template;
     private String lang;
 
-    public Saying(){
+    public Saying(){ }
 
-    }
-
-    public Saying(String id, String template, String lang) {
-        this.id = id;
+    public Saying(String template, String lang) {
         this.template = template;
         this.lang = lang;
     }
@@ -32,7 +32,7 @@ public class Saying {
         return lang;
     }
 
-    public Saying apply(Optional<String> name) {
-        return new Saying(this.id, String.format(template, name.or("Stranger")), lang);
+    public String apply(Optional<String> name) {
+        return String.format(template, name.or("Stranger"));
     }
 }

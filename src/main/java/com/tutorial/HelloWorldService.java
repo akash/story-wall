@@ -33,7 +33,7 @@ public class HelloWorldService extends Service<HelloWorldConfiguration> {
 
         JacksonDBCollection<Saying, String> sayings =
                 JacksonDBCollection.wrap(db.getCollection("sayings"), Saying.class, String.class);
-        sayings.insert(new Saying("1", "Hello %s", "en"));
+        sayings.insert(new Saying("Hello %s", "en"));
         environment.addResource(new HelloWorldResource(sayings));
         environment.addResource(new StoryResource());
     }
