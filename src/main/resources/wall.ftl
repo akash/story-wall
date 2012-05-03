@@ -2,7 +2,7 @@
 <#include 'macros.ftl'>
 <@header "Story Wall" />
 <body>
-    <h1>Story wall</h1>
+    <h1>Story wall awesome</h1>
 
     <div class="wall-column">
         <h2 class="column-title">Backlog</h2>
@@ -25,7 +25,7 @@
         </ul>
     </div>
 
-    <a href="/stories/new" style="clear:both;float:left">Add Story</a>
+    <a href="/estimate/new" style="clear:both;float:left">Add Story</a>
 
 </body>
 <@footer />
