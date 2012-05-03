@@ -2,6 +2,27 @@
 <#include 'macros.ftl'>
 <@header "Story Wall" />
 <body>
+<script>
+$(function() {
+	$( "#backlog, #inProgress, #done" ).sortable({
+		connectWith: ".column-data",
+           revert: true,
+           receive: function(event, ui) {
+               var uri = '/stories/' + ui.item.attr('id') + '/change-column';
+               // /stories/{id}/change-column  @PathParam("id") String id
+               $.ajax({
+                 type: 'POST',
+                 url: uri,
+                 data: { 'column': ui.item.parent().attr('id') },
+                 success: function () { /* do something here */ },
+                 error: function () { ui.sender.append(ui.item) }
+               });
+           }
+	}).disableSelection();
+});
+</script>
+
+
 <h1>Story wall awesome</h1>
 
 <#if newStory??>

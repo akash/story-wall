@@ -47,7 +47,7 @@ public class StoryResource {
     @POST
     @Path("/new")
     public Response createNewStory(@FormParam("title") String title, @FormParam("estimate") String estimate){
-        WriteResult<Story,String> writeResult = stories.insert(new Story(title, estimate));
+        WriteResult<Story,String> writeResult = stories.insert(new Story(title, estimate, Story.State.backlog));
 
         return Response.seeOther(URI.create(String.format("/stories?new=%s", writeResult.getSavedId()))).build();
     }

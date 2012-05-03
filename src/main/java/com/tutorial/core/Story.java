@@ -4,19 +4,25 @@ import net.vz.mongodb.jackson.Id;
 
 public class Story {
 
+    public enum State{
+        backlog,
+        inProgress,
+        done
+    }
     @Id
     private String id;
     private String title;
     private String estimate;
+    private State state;
 
     public Story() {
         /* for serialization*/
     }
 
-    public Story(String title, String estimate) {
-
+    public Story(String title, String estimate, State state) {
         this.title = title;
         this.estimate = estimate;
+        this.state = state;
     }
 
 
