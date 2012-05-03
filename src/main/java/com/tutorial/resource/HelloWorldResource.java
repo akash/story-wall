@@ -32,6 +32,14 @@ public class HelloWorldResource {
             return Response.status(NOT_FOUND).build();
         }
 
-        return Response.ok(saying.apply(name)).build();
+        return Response.ok(new Output(saying.apply(name))).build();
+    }
+
+    private class Output{
+        private Output(String text) {
+            this.text = text;
+        }
+
+        public String text;
     }
 }
