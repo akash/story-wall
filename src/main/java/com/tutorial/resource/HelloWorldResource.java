@@ -2,9 +2,8 @@ package com.tutorial.resource;
 
 import com.google.common.base.Optional;
 import com.tutorial.core.Saying;
+import com.tutorial.repository.SayingRepository;
 import com.yammer.metrics.annotation.Timed;
-import net.vz.mongodb.jackson.DBCursor;
-import net.vz.mongodb.jackson.JacksonDBCollection;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -18,27 +17,18 @@ import static javax.ws.rs.core.Response.Status.NOT_FOUND;
 @Path("/hello-world")
 @Produces(MediaType.APPLICATION_JSON)
 public class HelloWorldResource {
-    private JacksonDBCollection<Saying, String> sayings;
+    private SayingRepository sayingRepository;
 
-    public HelloWorldResource(JacksonDBCollection<Saying, String> sayings) {
-        this.sayings = sayings;
+    public HelloWorldResource(SayingRepository sayingRepository) {
+        this.sayingRepository = sayingRepository;
     }
 
     @GET
     @Timed
     public Response sayHello(@QueryParam("name") Optional<String> name, @QueryParam("lang") Optional<String> lang) {
+        Saying saying = sayingRepository.findByLanguage(lang.or("en"));
 
-
-        DBCursor<Saying> result = sayings.find().is("lang", lang.or("en"));
-        Saying saying;
-
-        if (!result.hasNext())
-            saying = new Saying("Hello World!", "en");
-        else
-            saying = result.next();
-
-        if(saying == null)
-        {
+        if(saying == null) {
             return Response.status(NOT_FOUND).build();
         }
 

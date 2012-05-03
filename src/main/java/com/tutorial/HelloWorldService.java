@@ -5,6 +5,7 @@ import com.mongodb.Mongo;
 import com.tutorial.core.Saying;
 import com.tutorial.core.Story;
 import com.tutorial.health.MongoHealthCheck;
+import com.tutorial.repository.MongoSayingRepository;
 import com.tutorial.resource.HelloWorldResource;
 import com.tutorial.resource.StoryResource;
 import com.yammer.dropwizard.Service;
@@ -33,10 +34,12 @@ public class HelloWorldService extends Service<HelloWorldConfiguration> {
         environment.addHealthCheck(new MongoHealthCheck(mongo));
 
         JacksonDBCollection<Saying, String> sayings = JacksonDBCollection.wrap(db.getCollection("sayings"), Saying.class, String.class);
-        JacksonDBCollection<Story, String> stories = JacksonDBCollection.wrap(db.getCollection("stories"), Story.class, String.class);
         if (sayings.find().count() == 0)
             sayings.insert(new Saying("Hello %s", "en"));
-        environment.addResource(new HelloWorldResource(sayings));
+
+        environment.addResource(new HelloWorldResource(new MongoSayingRepository(sayings)));
+
+        JacksonDBCollection<Story, String> stories = JacksonDBCollection.wrap(db.getCollection("stories"), Story.class, String.class);
         environment.addResource(new StoryResource(stories));
     }
 
