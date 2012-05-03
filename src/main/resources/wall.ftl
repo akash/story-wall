@@ -3,8 +3,7 @@
 <@header "Story Wall" />
 <body>
     <style>
-        #backlog, #inProgress, #done { list-style-type: none; margin: 0; padding: 0 0 2.5em; float: left; margin-right: 10px; }
-        #backlog li, #inProgress li, #done li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; width: 120px; }
+
     </style>
 	<script>
 	$(function() {
@@ -33,7 +32,7 @@
         <h2 class="column-title">Backlog</h2>
         <ul id="backlog" class="column-data">
             <#list backlogStories as story>
-                <li class="story" id="${story.id}">${story.name} - ${story.estimate}</li>
+                <@story_li story />
             </#list>
         </ul>
     </div>
@@ -42,7 +41,7 @@
         <h2 class="column-title">In Progress</h2>
         <ul id="inProgress" class="column-data">
             <#list inProgressStories as story>
-                <li class="story" id="${story.id}">${story.name} - ${story.estimate}</li>
+                <@story_li story />
             </#list>
         </ul>
     </div>
@@ -51,7 +50,7 @@
         <h2 class="column-title">Done</h2>
         <ul id="done" class="column-data">
             <#list doneStories as story>
-                <li class="story" id="${story.id}">${story.name} - ${story.estimate}</li>
+                <@story_li story />
             </#list>
         </ul>
     </div>
@@ -60,3 +59,7 @@
 
 </body>
 <@footer />
+
+<#macro story_li story >
+<li class="story" id="${story.id}"><span class="name">${story.name}</span><span class="estimate">(${story.estimate})</span></li>
+</#macro>

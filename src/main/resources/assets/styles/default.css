@@ -1,21 +1,41 @@
 html {
     background: #eeeeee;
 }
+
 body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     background: #eeeeee;
     color: #333333;
 }
 
-.wall-column{
-    float:left;
+.wall-column {
+    float: left;
     padding-left: 100px;
     padding-right: 100px;
     list-style: none;
 }
 
-.column-data{
+.column-data {
     display: inline;
     height: 300px;
     width: 100%;
+}
+
+#backlog, #inProgress, #done {
+    list-style-type: none;
+    margin: 0 10px 0 0;
+    padding: 0 0 2.5em;
+    float: left;
+}
+
+#backlog li, #inProgress li, #done li {
+    margin: 0 5px 5px 5px;
+    padding: 5px;
+    font-size: 1.2em;
+    width: 120px;
+    background: #ffffff
+}
+
+.name {
+    display: block;
 }
