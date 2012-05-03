@@ -35,7 +35,7 @@ public class HelloWorldResource {
         return Response.ok(new Output(saying.apply(name))).build();
     }
 
-    private class Output{
+    public class Output{
         private Output(String text) {
             this.text = text;
         }

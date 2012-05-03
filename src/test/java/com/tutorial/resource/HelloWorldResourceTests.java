@@ -37,6 +37,6 @@ public class HelloWorldResourceTests {
 
         // Then
         assertThat(response.getStatus(), is(OK.getStatusCode()));
-//        assertThat(response.getEntity().toString(), is("hello Stranger"));
+        assertThat(((HelloWorldResource.Output) response.getEntity()).text, is("hello Stranger"));
     }
 }
