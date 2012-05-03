@@ -13,7 +13,7 @@ import javax.ws.rs.core.Response;
 
 import static javax.ws.rs.core.Response.Status.OK;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertThat;
 import static org.mockito.BDDMockito.given;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -37,6 +37,6 @@ public class HelloWorldResourceTests {
 
         // Then
         assertThat(response.getStatus(), is(OK.getStatusCode()));
-//        assertThat(response.getEntity().toString(), is("hello Stranger"));
+        assertThat(response.getEntity().toString(), is("hello Stranger"));
     }
 }

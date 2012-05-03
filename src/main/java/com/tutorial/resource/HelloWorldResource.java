@@ -41,5 +41,9 @@ public class HelloWorldResource {
         }
 
         public String text;
+
+        public String toString() {
+            return text;
+        }
     }
 }
