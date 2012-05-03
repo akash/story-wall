@@ -3,13 +3,24 @@
 <@header "Story Wall" />
 <body>
     <style>
-        #sortable1, #sortable2, #sortable3 { list-style-type: none; margin: 0; padding: 0 0 2.5em; float: left; margin-right: 10px; }
-        #sortable1 li, #sortable2 li, #sortable3 li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; width: 120px; }
+        #backlog, #inProgress, #done { list-style-type: none; margin: 0; padding: 0 0 2.5em; float: left; margin-right: 10px; }
+        #backlog li, #inProgress li, #done li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; width: 120px; }
     </style>
 	<script>
 	$(function() {
-		$( "#sortable1, #sortable2, #sortable3" ).sortable({
-			connectWith: ".column-data"
+		$( "#backlog, #inProgress, #done" ).sortable({
+			connectWith: ".column-data",
+            revert: true,
+            receive: function(event, ui) {
+                var uri = '/stories/' + ui.item.attr('id') + '/change-column';
+                $.ajax({
+                  type: 'POST',
+                  url: uri,
+                  data: { 'column': ui.item.parent().attr('id') },
+                  success: function () { /* do something here */ },
+                  error: function () { ui.sender.append(ui.item) }
+                });
+            }
 		}).disableSelection();
 	});
 	</script>
@@ -20,28 +31,28 @@
     </#if>
     <div class="wall-column">
         <h2 class="column-title">Backlog</h2>
-        <ul id="sortable1" class="column-data">
-            <#list stories as story>
-                <li class="story"><span>${story.name} - ${story.estimate}</span></li>
+        <ul id="backlog" class="column-data">
+            <#list backlogStories as story>
+                <li class="story" id="${story.id}">${story.name} - ${story.estimate}</li>
             </#list>
         </ul>
     </div>
 
     <div  class="wall-column">
         <h2 class="column-title">In Progress</h2>
-        <ul id="sortable2" class="column-data">
-        <#list stories as story>
-            <li class="story"><span>${story.name} - ${story.estimate}</span></li>
-        </#list>
+        <ul id="inProgress" class="column-data">
+            <#list inProgressStories as story>
+                <li class="story" id="${story.id}">${story.name} - ${story.estimate}</li>
+            </#list>
         </ul>
     </div>
 
     <div  class="wall-column">
         <h2 class="column-title">Done</h2>
-        <ul id="sortable3" class="column-data">
-        <#list stories as story>
-            <li class="story"><span>${story.name} - ${story.estimate}</span></li>
-        </#list>
+        <ul id="done" class="column-data">
+            <#list doneStories as story>
+                <li class="story" id="${story.id}">${story.name} - ${story.estimate}</li>
+            </#list>
         </ul>
     </div>
 

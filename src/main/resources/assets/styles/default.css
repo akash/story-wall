@@ -12,6 +12,10 @@ body {
     padding-left: 100px;
     padding-right: 100px;
     list-style: none;
-    height: 500px
 }
 
+.column-data{
+    display: inline;
+    height: 300px;
+    width: 100%;
+}

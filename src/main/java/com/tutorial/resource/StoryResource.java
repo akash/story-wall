@@ -5,8 +5,8 @@ import com.tutorial.core.Story;
 import com.tutorial.view.CreateStoryView;
 import com.tutorial.view.StoriesView;
 import com.yammer.metrics.annotation.Timed;
-import net.vz.mongodb.jackson.DBCursor;
 import net.vz.mongodb.jackson.DBQuery;
+import net.vz.mongodb.jackson.DBUpdate;
 import net.vz.mongodb.jackson.JacksonDBCollection;
 import net.vz.mongodb.jackson.WriteResult;
 import org.bson.types.ObjectId;
@@ -15,6 +15,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.net.URI;
+import java.util.List;
 
 @Path("/stories")
 @Produces(MediaType.TEXT_HTML)
@@ -29,12 +30,14 @@ public class StoryResource {
     @GET
     @Timed
     public StoriesView viewWall(@QueryParam("new")Optional<String> newId){
-        DBCursor<Story> allStories = stories.find();
+        List<Story> backlogStories = stories.find().in("state", Story.State.backlog).toArray();
+        List<Story> inProgressStories = stories.find().in("state", Story.State.inProgress).toArray();
+        List<Story> doneStories = stories.find().in("state", Story.State.done).toArray();
         Story newStory = null;
         if (newId.isPresent())
             newStory = stories.findOne(DBQuery.is("_id", new ObjectId(newId.get())));
 
-        return new StoriesView(allStories.toArray(), newStory);
+        return new StoriesView(backlogStories, inProgressStories, doneStories, newStory);
     }
 
     @GET
@@ -47,7 +50,16 @@ public class StoryResource {
     @Path("/new")
     @Timed
     public Response createStory(@FormParam("story_name") String name, @FormParam("story_estimate") String estimate){
-        WriteResult<Story,String> writeResult = stories.insert(new Story(name, estimate));
+        WriteResult<Story,String> writeResult = stories.insert(new Story(name, estimate, Story.State.backlog));
         return Response.seeOther(URI.create(String.format("/stories?new=%s", writeResult.getSavedId()))).build();
     }
+
+    @POST
+    @Path("/{id}/change-column")
+    @Timed
+    public Response changeColumn(@PathParam("id") String id, @FormParam("column")String column){
+        stories.update(DBQuery.is("_id", new ObjectId(id)), DBUpdate.set("state", column));
+        return Response.noContent().build();
+    }
+
 }

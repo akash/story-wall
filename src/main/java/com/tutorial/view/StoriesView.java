@@ -7,17 +7,30 @@ import java.util.List;
 
 public class StoriesView extends View {
 
-    private List<Story> stories;
+    private List<Story> doneStories;
+    private List<Story> inProgressStories;
+    private List<Story> backlogStories;
     private Story newStory;
 
-    public StoriesView(List<Story> stories, Story newStory) {
+    public StoriesView(List<Story> backlogStories, List<Story> inProgressStories, List<Story> doneStories, Story newStory) {
         super("/wall.ftl");
-        this.stories = stories;
+        this.doneStories = doneStories;
+        this.inProgressStories = inProgressStories;
+        this.backlogStories = backlogStories;
         this.newStory = newStory;
     }
 
-    public List<Story> getStories() {
-        return stories;
+    public List<Story> getBacklogStories() {
+        return backlogStories;
+    }
+
+    public List<Story> getInProgressStories() {
+        return inProgressStories;
+
+    }
+
+    public List<Story> getDoneStories() {
+        return doneStories;
     }
 
     public Story getNewStory() {
