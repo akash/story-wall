@@ -25,7 +25,7 @@
         </ul>
     </div>
 
-    <a href="/estimate/new" style="clear:both;float:left">Add Story</a>
+    <a href="/stories/new" style="clear:both;float:left">Add Story</a>
 
 </body>
 <@footer />

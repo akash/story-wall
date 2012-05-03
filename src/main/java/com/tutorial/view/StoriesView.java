@@ -6,6 +6,5 @@ public class StoriesView extends View {
 
     public StoriesView() {
         super("/wall.ftl");
-
     }
 }

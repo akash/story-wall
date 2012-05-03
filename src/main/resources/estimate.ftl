@@ -6,9 +6,9 @@
 
     <div class="wall-column">
         <label for="title">Title</label>
-        <input type="text" name="Title"/></br>
+        <input type="text" name="title"/></br>
          <label for="estimate">Estimate</label>
-        <input type="text" name="Estimate"/>
+        <input type="text" name="estimate"/>
     </div>
 
 </body>

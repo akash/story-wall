@@ -18,5 +18,4 @@ public class HelloWorldConfiguration extends Configuration {
 
     @JsonProperty @NotEmpty
     public String mongodb = "yourdb";
-
 }
