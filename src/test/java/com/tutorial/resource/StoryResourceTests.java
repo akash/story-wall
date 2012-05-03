@@ -32,17 +32,22 @@ public class StoryResourceTests {
 
     @Test
     public void shouldPassAllStoriesToTemplate(){
+        net.vz.mongodb.jackson.
         // Given
-        List<Story> expectedStories = asList(mock(Story.class));
-        DBCursor<Story> mockCursor = mock(DBCursor.class);
-        given(storyCollection.find()).willReturn(mockCursor);
-        given(mockCursor.toArray()).willReturn(expectedStories);
+        // ARGH! you can't mock the JacksonDbCollection??
+        JacksonDBCollection<Story, String> storyCollection = mock(JacksonDBCollection.class);
+        List<Story> expectedBacklog = asList(mock(Story.class));
+        DBCursor<Story> mockStoryCollection = mock(DBCursor.class);
+        DBCursor<Story> backlogCollection = mock(DBCursor.class);
+        given(storyCollection.find()).willReturn(mockStoryCollection);
+        given(mockStoryCollection.in("state", Story.State.backlog)).willReturn(backlogCollection);
+        given(backlogCollection.toArray()).willReturn(expectedBacklog);
 
         // When
         StoriesView view = resource.viewWall(Optional.<String>absent());
 
         // Then
-        assertThat(view.getTemplateName(), is("wall.ftl"));
-        assertThat(view.getStories(), is(expectedStories));
+        assertThat(view.getTemplateName(), is("/wall.ftl"));
+        assertThat(view.getBacklogStories(), is(expectedBacklog));
     }
 }
