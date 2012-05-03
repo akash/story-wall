@@ -4,6 +4,9 @@
 <body>
     <h1>Story wall awesome</h1>
 
+    <#if newStory??>
+        <span>Congrats you've created a story - ${newStory.title}</span>
+    </#if>
     <div class="wall-column">
         <h2 class="column-title">Backlog</h2>
         <ul id="backlog" class="column-data">

@@ -1,11 +1,14 @@
 package com.tutorial.resource;
 
+import com.google.common.base.Optional;
 import com.tutorial.core.Story;
 import com.tutorial.view.EstimateView;
 import com.tutorial.view.StoriesView;
 import com.yammer.metrics.annotation.Timed;
+import net.vz.mongodb.jackson.DBQuery;
 import net.vz.mongodb.jackson.JacksonDBCollection;
 import net.vz.mongodb.jackson.WriteResult;
+import org.bson.types.ObjectId;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -24,8 +27,13 @@ public class StoryResource {
 
     @GET
     @Timed
-    public StoriesView viewWall(){
-        return new StoriesView();
+    public StoriesView viewWall(@QueryParam("new")Optional<String> newId){
+        Story newStory = null;
+
+        if (newId.isPresent())
+            newStory = stories.findOne(DBQuery.is("_id", new ObjectId(newId.get())));
+
+        return new StoriesView(newStory);
     }
 
     @GET
