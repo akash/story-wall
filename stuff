@@ -1,0 +1,14 @@
+localhost:8081/healthcheck
+
+server hello-world.yml
+
+localhost:8080/stories
+
+
+git stash  (saves changes)
+
+git checkout . (reset changes)
+
+git pull (get latest)
+
+db.stories.update({state:null},{$set: {state:'backlog'}}, false, true)
