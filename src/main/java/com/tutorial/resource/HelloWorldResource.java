@@ -5,7 +5,10 @@ import com.tutorial.core.Saying;
 import com.tutorial.repository.SayingRepository;
 import com.yammer.metrics.annotation.Timed;
 
-import javax.ws.rs.*;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -20,17 +23,9 @@ public class HelloWorldResource {
         this.sayingRepository = sayingRepository;
     }
 
-
     @GET
-    @Path("/simple")
-    public Response simpleHelloWorld(){
-        return Response.ok(new Output("Hello world")).build();
-    }
-
-    @GET
-    @Path("/{lang}")
     @Timed
-    public Response sayHello(@QueryParam("name") Optional<String> name, @PathParam("lang") Optional<String> lang) {
+    public Response sayHello(@QueryParam("name") Optional<String> name, @QueryParam("lang") Optional<String> lang) {
         Saying saying = sayingRepository.findByLanguage(lang.or("en"));
 
         if(saying == null) {
