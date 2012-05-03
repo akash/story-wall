@@ -7,9 +7,9 @@
     <div class="wall-column">
         <form action="/stories/new" method="post">
             <label for="title">Title</label>
-            <input type="text" name="title"/><br/>
-                <label for="estimate">Estimate</label>
-            <input type="text" name="estimate"/> <br/>
+            <input type="text" id="title" name="title"/><br/>
+            <label for="estimate">Estimate</label>
+            <input type="text" id="estimate" name="estimate"/> <br/>
             <input type="submit" value="submit" />
         </form>
     </div>
