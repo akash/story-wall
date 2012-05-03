@@ -2,33 +2,42 @@
 <#include 'macros.ftl'>
 <@header "Story Wall" />
 <body>
-    <h1>Story wall awesome</h1>
+<h1>Story wall awesome</h1>
 
-    <#if newStory??>
-        <span>Congrats you've created a story - ${newStory.title}</span>
-    </#if>
-    <div class="wall-column">
-        <h2 class="column-title">Backlog</h2>
-        <ul id="backlog" class="column-data">
+<#if newStory??>
+<span>Congrats you've created a story - ${newStory.title}</span>
+</#if>
+<div class="wall-column">
+    <h2 class="column-title">Backlog</h2>
+    <ul id="backlog" class="column-data">
+    <#list backlogStories as story>
+                <@story_li story />
+            </#list>
+    </ul>
+</div>
 
-        </ul>
-    </div>
+<div class="wall-column">
+    <h2 class="column-title">In Progress</h2>
+    <ul id="inProgress" class="column-data">
 
-    <div  class="wall-column">
-        <h2 class="column-title">In Progress</h2>
-        <ul id="inProgress" class="column-data">
+    </ul>
+</div>
 
-        </ul>
-    </div>
+<div class="wall-column">
+    <h2 class="column-title">Done</h2>
+    <ul id="done" class="column-data">
 
-    <div  class="wall-column">
-        <h2 class="column-title">Done</h2>
-        <ul id="done" class="column-data">
+    </ul>
+</div>
 
-        </ul>
-    </div>
-
-    <a href="/stories/new" style="clear:both;float:left">Add Story</a>
+<a href="/stories/new" style="clear:both;float:left">Add Story</a>
 
 </body>
 <@footer />
+
+<#macro story_li story>
+<li>
+    <span class="name">${story.title!"hello"}</span>
+    <span class="estimate">(${story.estimate})</span>
+</li>
+</#macro>

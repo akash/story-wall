@@ -14,6 +14,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.net.URI;
+import java.util.List;
 
 @Path("/stories")
 @Produces(MediaType.TEXT_HTML)
@@ -33,7 +34,8 @@ public class StoryResource {
         if (newId.isPresent())
             newStory = stories.findOne(DBQuery.is("_id", new ObjectId(newId.get())));
 
-        return new StoriesView(newStory);
+        List<Story> backlogStories = stories.find().toArray();
+        return new StoriesView(newStory, backlogStories);
     }
 
     @GET
